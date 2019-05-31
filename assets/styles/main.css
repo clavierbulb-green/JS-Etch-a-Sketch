@@ -1,5 +1,4 @@
 
-
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -17,5 +16,4 @@
 
 #clear__button {
     margin: 5px;
-    width: 15%;
 }

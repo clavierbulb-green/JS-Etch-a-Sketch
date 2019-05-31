@@ -1,9 +1,10 @@
 //Create a webpage with a 16x16 grid of square divs 
 
 //variables
-let numRows= 16;
-let numColumns = 16;
+let numRows= 32;
+let numColumns = 32;
 let isDrawing = false; 
+let fineDraw = false;
 
 let grid__container = document.querySelector(".grid__container");
 
@@ -17,43 +18,79 @@ clear__button.addEventListener("click", e => {
     }
 });
 
+let toggle__gradient__button =
+document.querySelector("#toggle__gradient__button");
+toggle__gradient__button.addEventListener("click", e => {
+    fineDraw = !fineDraw;
+    if (fineDraw) {
+        toggle__gradient__button.textContent = "TOGGLE MODE [FINE]";
+    }
+    else {
+        toggle__gradient__button.textContent = "TOGGLE MODE [BASIC]";
+    }
+});
+
 /*==========FUNCTIONS==========*/
 
 function addSquares() {
     for (let row = 1; row <= numRows; row++) {
         for (let col = 1; col <= numColumns; col++) {
-            let newSquare = document.createElement('div');
-            newSquare.style["grid-column"] = col;
-            newSquare.style["grid-row"] = row;
+            let square = document.createElement('div');
+            square.style["grid-column"] = col;
+            square.style["grid-row"] = row;
 
-            newSquare.style.border = "1px #AAAAAA solid";
+            square.setAttribute("color-key", "0");
+            square.style["background-color"] = "black";
+            square.style.border = "1px #AAAAAA solid";
 
             /*a square is marked by a mouse-click on the square
             squares continue to be marked as the mouse hovers over them
             as long as the mouse is down*/
-            newSquare.addEventListener("mouseenter", e => {
+            square.addEventListener("mouseenter", e => {
                 if (isDrawing) {
-                    newSquare.style["background-color"] = 'black';
+                    if (fineDraw) {
+                        changeColor(square);
+                    }
+                    else {
+                        square.setAttribute("color-key", "f");
+                        square.style["background-color"] = 'white';
+                    }
                 }
             });
-            newSquare.addEventListener("mousedown", e => {
+            square.addEventListener("mousedown", e => {
                 isDrawing = true;
-                newSquare.style["background-color"] = 'black';
+                if (fineDraw) {
+                    changeColor(square);
+                }
+                else {
+                    square.setAttribute("color-key", "f");
+                    square.style["background-color"] = 'white';
+                }
             });
-            newSquare.addEventListener("mouseup", e => {
+            square.addEventListener("mouseup", e => {
                 isDrawing = false;
             });
 
-            grid__container.appendChild(newSquare);
+            grid__container.appendChild(square);
         }
     }
+}
+
+function changeColor(square) {
+    let colorHex = parseInt(square.getAttribute("color-key"), 16);
+    colorHex += 4;
+    let colorString = colorHex.toString(16);
+    square.setAttribute("color-key", colorString);
+    colorString = "#" + colorString.repeat(6);
+    square.style["background-color"] = colorString;
 }
 
 function clearGrid() {
     //console.log('in clearGrid()');
     let squares = document.querySelectorAll('.grid__container div');
     squares.forEach(listObj => {
-        listObj.style["background-color"] = "white";
+        listObj.setAttribute("color-key", "0");
+        listObj.style["background-color"] = "black";
     });
 }
 

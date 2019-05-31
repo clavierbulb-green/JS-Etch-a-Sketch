@@ -9,8 +9,12 @@
 </head>
 <body>
     <div class="wrapper">
-        <button id="clear__button">CLEAR GRID</button>
-        <div class="grid__container"></div>
+        <div class="button__wrapper">
+            <button id="clear__button">CLEAR GRID</button>
+            <button id="toggle__gradient__button">TOGGLE MODE [BASIC]</button>
+        </div>
+        <!--prevent drag from interfering with drawing on grid-->
+        <div class="grid__container" onmousedown="return false"></div>
     </div>
 </body>
 </html>
