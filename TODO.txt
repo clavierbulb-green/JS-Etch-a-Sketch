@@ -1,0 +1,7 @@
+-allow user to toggle fineness
+-allow user to toggle board-size via a button/radio
+-allow user to toggle color/black v. white
+-display board-size
+-display fineness
+-display drawing mode
+

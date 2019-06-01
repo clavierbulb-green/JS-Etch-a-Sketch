@@ -13,4 +13,4 @@ drawn over, allowing for finer shading and expression.
 
 Inspired by and written as a solution to the practice project [Etch-a-Sketch](
 https://www.theodinproject.com/courses/web-development-101/lessons/etch-a-
-sketch-project)by the Odin Project
+sketch-project) by the Odin Project
