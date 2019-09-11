@@ -1,14 +1,14 @@
-//Create a webpage with a 16x16 grid of square divs 
+//Create a 16x16 grid of square divs 
 
 //variables
-let numRows= 32;
-let numColumns = 32;
-let isDrawing = false; 
-let fineDraw = false;
+let numRows= 16;
+let numColumns = 16;
+let drawing = false; 
+let fineDrawing = false;
 
 let grid__container = document.querySelector(".grid__container");
 
-//add functionality to button
+//add functionality to buttons
 let clear__button = document.querySelector("#clear__button");
 clear__button.addEventListener("click", e => {
     clearGrid();
@@ -21,14 +21,26 @@ clear__button.addEventListener("click", e => {
 let toggle__gradient__button =
 document.querySelector("#toggle__gradient__button");
 toggle__gradient__button.addEventListener("click", e => {
-    fineDraw = !fineDraw;
-    if (fineDraw) {
+    fineDrawing = !fineDrawing;
+    if (fineDrawing) {
         toggle__gradient__button.textContent = "TOGGLE MODE [FINE]";
     }
     else {
         toggle__gradient__button.textContent = "TOGGLE MODE [BASIC]";
     }
 });
+
+/*
+let invert__color__button = 
+document.querySelector("#invert__color__button");
+invert__color__button.addEventListener("click", e => {
+    //TODO support inverting shaded squares
+    let squares = document.querySelectorAll('.grid__container div');
+    squares.forEach(listObj => {
+        //TODO
+    });
+});
+*/
 
 /*==========FUNCTIONS==========*/
 
@@ -40,35 +52,33 @@ function addSquares() {
             square.style["grid-row"] = row;
 
             square.setAttribute("color-key", "0");
-            square.style["background-color"] = "black";
+            square.style["background-color"] = "#000000";
             square.style.border = "1px #AAAAAA solid";
 
-            /*a square is marked by a mouse-click on the square
-            squares continue to be marked as the mouse hovers over them
-            as long as the mouse is down*/
+            /* A square is marked by a mouse-click on the square.
+            Squares continue to be marked as the mouse hovers over them
+            as long as the mouse is down */
             square.addEventListener("mouseenter", e => {
-                if (isDrawing) {
-                    if (fineDraw) {
-                        changeColor(square);
+                if (drawing) {
+                    if (fineDrawing) {
+                        shade(square);
                     }
                     else {
-                        square.setAttribute("color-key", "f");
-                        square.style["background-color"] = 'white';
+                        invertColor(square);
                     }
                 }
             });
             square.addEventListener("mousedown", e => {
-                isDrawing = true;
-                if (fineDraw) {
-                    changeColor(square);
+                drawing = true;
+                if (fineDrawing) {
+                    shade(square);
                 }
                 else {
-                    square.setAttribute("color-key", "f");
-                    square.style["background-color"] = 'white';
+                    invertColor(square);
                 }
             });
             square.addEventListener("mouseup", e => {
-                isDrawing = false;
+                drawing = false;
             });
 
             grid__container.appendChild(square);
@@ -76,28 +86,41 @@ function addSquares() {
     }
 }
 
-function changeColor(square) {
-    let colorHex = parseInt(square.getAttribute("color-key"), 16);
-    colorHex += 4;
-    let colorString = colorHex.toString(16);
-    square.setAttribute("color-key", colorString);
-    colorString = "#" + colorString.repeat(6);
-    square.style["background-color"] = colorString;
+
+function invertColor(square) {
+    square.setAttribute("color-key", "255");
+    square.style["background-color"] = "rgb(255, 255, 255)";
 }
 
+
+function shade(square) {
+    let colorKey = Number(square.getAttribute("color-key"))
+    // 256/32 = 8, so 9 shades total including black and white
+    if (colorKey < 255) {
+        colorKey += 32;
+        console.log(colorKey);
+        square.setAttribute("color-key", colorKey);
+
+        let colorString = 
+            "rgb(" + colorKey + ", " + colorKey + ", " + colorKey + ")";
+        square.style["background-color"] = colorString;
+    }
+}
+
+
 function clearGrid() {
-    //console.log('in clearGrid()');
     let squares = document.querySelectorAll('.grid__container div');
     squares.forEach(listObj => {
         listObj.setAttribute("color-key", "0");
-        listObj.style["background-color"] = "black";
+        listObj.style["background-color"] = "#000000";
     });
 }
+
 
 function makeNewGrid() {
     let newLength = 0;
     while (newLength < 2 || newLength >= 100) {
-        newLength = prompt("how many squares per side to make the new grid?" +
+        newLength = prompt("How many squares per side to make the new grid?" +
         "(Enter a length between 2 and 100)");
     }
     numRows = newLength;
@@ -111,4 +134,3 @@ function makeNewGrid() {
 }
 
 addSquares();
-
