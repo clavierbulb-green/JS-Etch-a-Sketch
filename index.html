@@ -5,16 +5,24 @@
     <title>Etch-A-Sketch</title>
     <link rel="stylesheet" href="assets/styles/reset.css">
     <link rel="stylesheet" href="assets/styles/main.css">
-    <script src="scripts/main.js" async></script>
 </head>
 <body>
-    <div class="etch__a__sketch">
-        <div class="button__container">
-            <button id="clear__button">CLEAR GRID</button>
-            <button id="toggle__gradient__button">TOGGLE MODE [BASIC]</button>
+    <div id="app">
+        <div id="grid_container">
+            <div id="grid"></div>
         </div>
-        <!--prevent drag from interfering with drawing on grid-->
-        <div class="grid__container" onmousedown="return false"></div>
+
+        <div id="button_container">
+            <button id="draw_button">draw</button>
+            <button id="clear_button">clear</button>
+        </div>
+
+        <div id="size_slider">
+            <label for="grid_size">Grid Size</label>
+            <input type="range" id="grid_size" min="2" max="48" step="1">
+        </div>
     </div>
+
+    <script src="scripts/main.js"></script>
 </body>
 </html>
