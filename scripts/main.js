@@ -42,11 +42,16 @@ function populateGrid(sideLength) {
         for (let col = 0; col < sideLength; col++) {
             let square = document.createElement("div");
             square.classList.add("square");
-            square.addEventListener("mouseenter", () => {
+
+            function markSquare() {
                 if (drawButton.classList.contains("active")) {
                     square.classList.add("marked");
                 }
-            });
+            }
+            square.addEventListener("mouseenter", markSquare);
+            square.addEventListener("touchmove", markSquare);
+            square.addEventListener("touchstart", markSquare);
+
             grid.appendChild(square);
         }
     }

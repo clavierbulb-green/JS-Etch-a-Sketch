@@ -139,7 +139,7 @@ input {
     letter-spacing: 0.1rem;
 }
 
-input:hover {
+input:hover, input:active {
     opacity: 1;
 }
 
@@ -156,7 +156,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:hover, button:active {
     opacity: 1;
 }
 
