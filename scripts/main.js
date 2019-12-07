@@ -1,5 +1,4 @@
 const grid = document.getElementById("grid");
-const defaultSideLength = 24;
 
 const clearButton = document.getElementById("clear_button");
 clearButton.addEventListener("click", () => clearGrid());
@@ -9,14 +8,14 @@ drawButton.addEventListener("click", () => {
     drawButton.classList.toggle("active");
 });
 
-const sizeSlider = document.getElementById("grid_size");
-sizeSlider.addEventListener("mouseup", () => {
+const sizeInput = document.getElementById("grid_size");
+sizeInput.addEventListener("input", () => {
     removeSquares();
-    populateGrid(sizeSlider.value);
+    populateGrid(sizeInput.value);
 });
 
 window.addEventListener("load", () => {
-    populateGrid(defaultSideLength);
+    populateGrid(sizeInput.value);
 });
 
 
