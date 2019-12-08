@@ -49,8 +49,13 @@ function populateGrid(sideLength) {
                 }
             }
             square.addEventListener("mouseenter", markSquare);
-            square.addEventListener("touchmove", markSquare);
-            square.addEventListener("touchstart", markSquare);
+            square.addEventListener("pointerdown", (e) => {
+                markSquare();
+                square.releasePointerCapture(e.pointerId);
+            });
+            square.addEventListener("pointerenter", markSquare);
+            //square.addEventListener("touchmove", markSquare);
+            //square.addEventListener("touchstart", markSquare);
 
             grid.appendChild(square);
         }
