@@ -14,6 +14,8 @@ Inspired by and written as a solution to the practice project
 
 + Press the `CLEAR` button to clear the grid. 
 
-+ Enter a number from 2 to 64 in the number input to change the number of squares on the grid
++ Select from the grid-size buttons to change the number of squares on the grid
 *(This will also clear any squares that have been marked).*
 
++ NOTE: Drawing by hovering does not work on mobile touchscreens, though touching
+the squares should still mark them.

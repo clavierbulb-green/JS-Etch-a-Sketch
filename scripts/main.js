@@ -1,3 +1,5 @@
+const DEFAULT_SIZE = 16;
+
 const grid = document.getElementById("grid");
 
 const clearButton = document.getElementById("clear_button");
@@ -8,14 +10,22 @@ drawButton.addEventListener("click", () => {
     drawButton.classList.toggle("active");
 });
 
-const sizeInput = document.getElementById("grid_size");
-sizeInput.addEventListener("input", () => {
-    removeSquares();
-    populateGrid(sizeInput.value);
-});
+const sizeButtons = document.getElementsByClassName("size");
+for (let i = 0; i < sizeButtons.length; i++){
+    let button = sizeButtons[i];
+    button.addEventListener("click", () => {
+        removeSquares();
+        populateGrid(button.textContent);
+
+        for (let j = 0; j < sizeButtons.length; j++) {
+            sizeButtons[j].classList.remove("current_size");
+        }
+        button.classList.add("current_size");
+    });
+}
 
 window.addEventListener("load", () => {
-    populateGrid(sizeInput.value);
+    populateGrid(DEFAULT_SIZE);
 });
 
 
