@@ -54,8 +54,6 @@ function populateGrid(sideLength) {
                 square.releasePointerCapture(e.pointerId);
             });
             square.addEventListener("pointerenter", markSquare);
-            //square.addEventListener("touchmove", markSquare);
-            //square.addEventListener("touchstart", markSquare);
 
             grid.appendChild(square);
         }
