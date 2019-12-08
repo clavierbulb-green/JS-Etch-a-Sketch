@@ -1,3 +1,11 @@
+:root {
+    --side_length: 88vmin;
+    --clear_button_size: calc(90vmax/8);
+    --draw_button_size: calc(90vmax/7);
+}
+
+*{ touch-action: none; }
+
 #app {
     display: flex;
     flex-direction: row;
@@ -5,83 +13,6 @@
     box-sizing: border-box;
 }
 
-@media (orientation: portrait) {
-    :root {
-        --side_length: 88vw;
-        --clear_button_size: calc(90vh/8);
-        --draw_button_size: calc(90vh/7);
-    }
-
-    #app {
-        flex-direction: column;
-        height: 95vh;
-        margin: 2.5vh 6vw;
-    }
-
-    button {
-        font-size: 5vw;
-    }
-
-    #button_container {
-        flex-direction: row;
-    }
-
-    #settings {
-        flex-direction: row;
-    }
-    
-    #settings label {
-        font-size: 5vw;
-        margin-right: 5%;
-    }
-
-    input#grid_size {
-        width: 26%;
-        font-size: 5vw;
-    }
-
-    #clear_button {
-        bottom: calc(25vh - var(--side_length) / 4 - var(--side_length) / 8);
-        left: calc(50vw - var(--side_length)/8);
-    }
-}
-
-
-@media (orientation: landscape) {
-    :root {
-        --side_length: 88vh;
-        --clear_button_size: calc(90vw/8);
-        --draw_button_size: calc(90vw/7);
-    }
-
-    #app {
-        width: 95vw;
-        margin: 6vh 2.5vw;
-    }
-
-    button {
-        font-size: 5vh;
-    }
-
-    #button_container{
-        flex-direction: column;
-        margin-left: 1%;
-    }
-
-    #settings {
-        flex-direction: column;
-    }
-
-    #settings label {
-        font-size: 5vh;
-        margin-bottom: 5%;
-    }
-
-    input#grid_size {
-        width: 60%;
-        font-size: 5vh;
-    }
-}
 
 /* GRID */
 #grid_container{
@@ -112,7 +43,7 @@
 }
 
 
-/* SLIDER */
+/* SIZE INPUT */
 #settings {
     flex: 1;
     display: flex;
@@ -126,8 +57,8 @@
     letter-spacing: 0.4rem;
     text-align: center;
     color: #455A64;
+    font-size: 5vmin;
 }
-
 
 input {
     appearance: none;
@@ -137,6 +68,7 @@ input {
     opacity: 0.7;
     text-align: center;
     letter-spacing: 0.1rem;
+    font-size: 5vmin;
 }
 
 input:hover, input:active {
@@ -154,6 +86,7 @@ button {
     text-align: center;
     letter-spacing: 0.1rem;
     cursor: pointer;
+    font-size: 5vmin;
 }
 
 button:hover, button:active {
@@ -184,4 +117,61 @@ button:hover, button:active {
 .active {
     background-color: #607D8B;
     opacity: 0.9;
+}
+
+
+/* MEDIA QUERIES */
+@media (orientation: portrait) {
+
+    #app {
+        flex-direction: column;
+        height: 95vh;
+        margin: 2.5vh 6vw;
+    }
+
+    #button_container {
+        flex-direction: row;
+    }
+
+    #settings {
+        flex-direction: row;
+    }
+    
+    #settings label {
+        margin-right: 5%;
+    }
+
+    input#grid_size {
+        width: 26%;
+    }
+
+    #clear_button {
+        bottom: calc(25vh - var(--side_length) / 4 - var(--side_length) / 8);
+        left: calc(50vw - var(--side_length)/8);
+    }
+}
+
+@media (orientation: landscape) {
+
+    #app {
+        width: 95vw;
+        margin: 6vh 2.5vw;
+    }
+
+    #button_container{
+        flex-direction: column;
+        margin-left: 1%;
+    }
+
+    #settings {
+        flex-direction: column;
+    }
+
+    #settings label {
+        margin-bottom: 5%;
+    }
+
+    input#grid_size {
+        width: 60%;
+    }
 }
