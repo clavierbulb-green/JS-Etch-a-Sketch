@@ -22,6 +22,9 @@ for (let i = 0; i < sizeButtons.length; i++){
         }
         button.classList.add("current_size");
     });
+    if (button.textContent == DEFAULT_SIZE) {
+        button.classList.add("current_size");
+    }
 }
 
 window.addEventListener("load", () => {
