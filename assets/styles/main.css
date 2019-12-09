@@ -36,6 +36,7 @@
 #grid .square{
     border: 1px solid white;
     box-sizing: border-box;
+    transition: background-color 0.4s ease-out;
 }
 
 .marked {
@@ -93,6 +94,10 @@ button {
     letter-spacing: 0.1rem;
     cursor: pointer;
     font-size: 5vmin;
+
+    transition-property: opacity, background-color;
+    transition-duration: 0.5s, 0.4s;
+    transition-timing-function: ease-out;
 }
 
 button:hover, button:active {
@@ -120,9 +125,8 @@ button:hover, button:active {
     height: var(--draw_button_size);
 }
 
-.active {
+#draw_button.active {
     background-color: #607D8B;
-    opacity: 0.9;
 }
 
 button.size {
@@ -136,6 +140,7 @@ button.size.current_size {
     background-color: white;
     color: #263238;
     border: 1px solid #263238;
+    transition: background-color 0.3s ease-out;
 }
 
 /* MEDIA QUERIES */
